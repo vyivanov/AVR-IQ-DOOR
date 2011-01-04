@@ -1,0 +1,52 @@
+.DEF    temp = R16
+
+; Protect registers for ISR use (since hardware stack)
+.DEF    SREG_backup = R0
+.DEF    R16_backup  = R1
+.DEF    R17_backup  = R2
+
+; Setup T0 for calculating delay between switching modes
+.EQU    F_CPU        = 1200000                                  ; Hz
+.DEF    T0_OF_count  = R24
+.EQU    T0_prescaler = 1024
+.EQU    T0_OF_period = 256
+.EQU    switch_delay = 6                                        ; sec [1 - 55]
+.EQU    F_T0         = F_CPU / T0_prescaler
+.EQU    T0_OF_number = (switch_delay * F_T0) / T0_OF_period
+
+; Pin to MOC3041
+.EQU    MOC_DDR  = DDRB
+.EQU    MOC_PORT = PORTB
+.EQU    MOC_LINE = PB3
+
+; Pin to LED
+.EQU    LED_DDR  = DDRB
+.EQU    LED_PORT = PORTB
+.EQU    LED_LINE = PB4
+
+; Pin to sensor
+.EQU    sensor_DDR  = DDRB
+.EQU    sensor_PORT = PORTB
+.EQU    sensor_LINE = PB1
+
+; Register R20 -- Program Status Flags (PSF)
+;----------------------------------------------------------
+;  (MSB)                                             (LSB)
+;  [ 0 ] [ 0 ] [ 0 ] [ 0 ] [ 0 ] [PSF_TM] [PSF_LC] [PSF_DC]
+;----------------------------------------------------------
+; DC (Door Condition):  set -- open,   clear -- close
+; LC (Lamp Condition):  set -- light,  clear -- black
+; TM (Triggering Mode): set -- D-Mode, clear -- T-Mode
+.DEF	PSF    = R20
+.EQU	PSF_DC = 0
+.EQU	PSF_LC = 1
+.EQU	PSF_TM = 2
+
+; Not Connected pins
+.EQU    NC1_DDR  = DDRB
+.EQU    NC1_PORT = PORTB
+.EQU    NC1_LINE = PB2
+
+.EQU    NC2_DDR  = DDRB
+.EQU    NC2_PORT = PORTB
+.EQU    NC2_LINE = PB0
