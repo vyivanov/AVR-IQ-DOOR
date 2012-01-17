@@ -1,10 +1,14 @@
-                .CSEG
+.CSEG
 
-                .ORG 0x000
+.ORG 0x0000
 
-                RJMP    init
-                RJMP    ISR_door_switch     ; IRQ0 handler
-                RETI
-                RJMP    ISR_mode_switch     ; Timer0 overflow handler
-                RETI
-                RETI
+            RJMP    init                // Hardware Reset
+            RJMP    ISR_door_switch     // INT0 Change
+            RETI                        // PCINT Change
+            RJMP    ISR_mode_switch     // Timer/Counter0 Overflow
+            RETI                        // EEPROM Ready
+            RETI                        // Analog Comparator
+            RETI                        // Timer/Counter0 Compare Match A
+            RETI                        // Timer/Counter0 Compare Match B
+            RETI                        // Watchdog Time-out
+            RETI                        // ADC Conversion Complete
