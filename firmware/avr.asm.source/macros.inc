@@ -1,4 +1,21 @@
 //-------------------------------------------------
+//           Ttest of using AVRASM version
+//-------------------------------------------------
+
+.MACRO TEST_AVRASM_VERSION
+        .EQU    AVRASM_VERSION_MAJOR = 2
+        .EQU    AVRASM_VERSION_MINOR = 0
+        .EQU    AVRASM_VERSION_CODE  = ((1000 * AVRASM_VERSION_MAJOR) + AVRASM_VERSION_MINOR)
+
+        .IF (__AVRASM_VERSION__ < AVRASM_VERSION_CODE)
+                .ERROR "Your version of AVRASM is out-of-date."
+        .ENDIF
+.ENDMACRO
+
+//-------------------------------------------------
+
+
+//-------------------------------------------------
 //                   Clear SRAM
 //-------------------------------------------------
 

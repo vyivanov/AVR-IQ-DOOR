@@ -7,7 +7,7 @@
 
 // Setup T0 for calculating delay between switching modes
 
-.EQU    F_CPU        = 1200000                                  // Hz
+.EQU    F_CPU        = 1_200_000                                // Hz
 .DEF    T0_OF_count  = R24
 .EQU    T0_prescaler = 1024
 .EQU    T0_OF_period = 256                                      // since 8bit TCNT0

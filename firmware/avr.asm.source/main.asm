@@ -12,17 +12,21 @@
             *         License:        GNU GPLv3                       *
             *---------------------------------------------------------*
             *         Create:         22 August  2010                 * 
-            *         Last edition:   17 January 2012                 *
+            *         Last edition:   21 January 2012                 *
             **********************************************************/
 
 
-.include "definitions.def"
+.LISTMAC
 
 .include "tn13Adef.inc"
+
+.include "definitions.inc"
 .include "macros.inc"
 
 .include "interrupt_vectors.asm"
 .include "initialisation.asm"
+
+TEST_AVRASM_VERSION
 
 
 //-------------------------------------------------
