@@ -1,0 +1,5 @@
+*.avr*
+Debug
+proteus
+main.hex
+HALL
